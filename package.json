@@ -1,0 +1,31 @@
+{
+  "name": "track-driving-history",
+  "version": "0.0.0",
+  "engines": {
+    "node": "10.15.3",
+    "yarn": "1.13.0"
+  },
+  "private": true,
+  "scripts": {
+    "clean:coverage": "npx rimraf coverage",
+    "clean:node_modules": "npx rimraf node_modules",
+    "clean": "yarn clean:coverage && yarn clean:node_modules",
+    "lint": "eslint .",
+    "test:jest": "NODE_ENV=test jest --config config/jest/index.js",
+    "test:watch": "yarn test:jest --watch",
+    "test": "yarn lint && yarn test:jest"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "6.4.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-prettier": "6.3.0",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-plugin-import": "2.18.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "jest": "24.9.0",
+    "prettier": "1.18.2",
+    "rimraf": "3.0.0"
+  }
+}
