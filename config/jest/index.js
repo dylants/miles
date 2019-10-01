@@ -3,9 +3,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.js'],
   coverageDirectory: '<rootDir>/coverage/',
-  coveragePathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-  ],
+  coveragePathIgnorePatterns: ['<rootDir>/node_modules/'],
   coverageReporters: ['text', 'lcov'],
   coverageThreshold: {
     global: {

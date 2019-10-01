@@ -1,9 +1,8 @@
 env:
   jest: true
 extends:
-  - airbnb
+  - airbnb-base
   - prettier
-parser: babel-eslint
 plugins:
   - prettier
 root: true
