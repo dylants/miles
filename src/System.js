@@ -41,13 +41,16 @@ class System {
   generateReports() {
     const driverData = [];
     const driverNames = Object.keys(this.drivers);
+    // loop over the set of drivers, generating the driver data for the report
     driverNames.forEach(driverName => {
       const driver = this.drivers[driverName];
       driverData.push(driver.generateDriverData());
     });
 
+    // we need to sort the list of driver data by the miles driven -- most to least
     const sortedDriverData = _.orderBy(driverData, 'totalMilesDriven', 'desc');
 
+    // finally, generate the report sentence for each driver
     return sortedDriverData.map(System.generateDriverReport);
   }
 

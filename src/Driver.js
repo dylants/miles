@@ -23,15 +23,18 @@ class Driver {
   }
 
   generateDriverData() {
-    if (this.totalMilesDriven === 0) {
+    // Round miles to the nearest integer
+    const totalMilesDriven = Math.round(this.totalMilesDriven);
+
+    // base case which assumes that if total miles is 0, average speed is 0
+    if (totalMilesDriven === 0) {
       return {
         averageSpeed: 0,
         name: this.name,
-        totalMilesDriven: this.totalMilesDriven,
+        totalMilesDriven,
       };
     }
 
-    const totalMilesDriven = Math.round(this.totalMilesDriven);
     const averageSpeed = Driver.calculateAverageSpeed({
       miles: this.totalMilesDriven,
       minutes: this.totalMinutesDriven,
@@ -50,6 +53,7 @@ class Driver {
   }
 
   static calculateAverageSpeed({ miles, minutes }) {
+    // Round miles per hour to the nearest integer
     return Math.round(miles / (minutes / 60));
   }
 
