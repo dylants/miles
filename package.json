@@ -11,6 +11,7 @@
     "clean:node_modules": "npx rimraf node_modules",
     "clean": "yarn clean:coverage && yarn clean:node_modules",
     "lint": "eslint .",
+    "run:example": "node src/index.js input.txt",
     "test:jest": "NODE_ENV=test jest --config config/jest/index.js",
     "test:watch": "yarn test:jest --watch",
     "test": "yarn lint && yarn test:jest"
