@@ -8,7 +8,17 @@ class Driver {
   }
 
   addTrip(trip) {
-    this.totalMinutesDriven += Driver.calculateMinutesBetween(trip);
+    const minutes = Driver.calculateMinutesBetween(trip);
+    const speed = Driver.calculateAverageSpeed({
+      miles: trip.milesDriven,
+      minutes,
+    });
+    // Discard any trips that average a speed of less than 5 mph or greater than 100 mph
+    if (speed < 5 || speed > 100) {
+      return;
+    }
+
+    this.totalMinutesDriven += minutes;
     this.totalMilesDriven += trip.milesDriven;
   }
 
@@ -22,9 +32,10 @@ class Driver {
     }
 
     const totalMilesDriven = Math.round(this.totalMilesDriven);
-    const averageSpeed = Math.round(
-      this.totalMilesDriven / (this.totalMinutesDriven / 60),
-    );
+    const averageSpeed = Driver.calculateAverageSpeed({
+      miles: this.totalMilesDriven,
+      minutes: this.totalMinutesDriven,
+    });
     return {
       averageSpeed,
       name: this.name,
@@ -36,6 +47,10 @@ class Driver {
     const startMoment = moment(startTime, 'kk:mm');
     const endMoment = moment(endTime, 'kk:mm');
     return moment.duration(endMoment.diff(startMoment)).asMinutes();
+  }
+
+  static calculateAverageSpeed({ miles, minutes }) {
+    return Math.round(miles / (minutes / 60));
   }
 
   static createFromInstructions(instructions) {

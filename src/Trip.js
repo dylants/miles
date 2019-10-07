@@ -7,11 +7,16 @@ class Trip {
   }
 
   static createFromInstructions(instructions) {
+    // the instructions contain the command, which we ignore with the slice,
+    // and then get the remainder of the instructions as trip input
+    const [driverName, startTime, endTime, milesDriven] = instructions.slice(1);
+
     return new Trip({
-      driverName: instructions[1],
-      endTime: instructions[3],
-      milesDriven: +instructions[4],
-      startTime: instructions[2],
+      driverName,
+      endTime,
+      // miles is input as a string, so convert it to a number
+      milesDriven: +milesDriven,
+      startTime,
     });
   }
 }

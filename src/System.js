@@ -8,27 +8,32 @@ class System {
     this.drivers = {};
   }
 
-  addDriver(instructions) {
+  processDriver(instructions) {
     const driver = Driver.createFromInstructions(instructions);
+
+    // collect the drivers into our map of drivers
     this.drivers[driver.name] = driver;
   }
 
-  addTrip(instructions) {
+  processTrip(instructions) {
     const trip = Trip.createFromInstructions(instructions);
+
+    // allow the driver to perform the work of adding a trip
     this.drivers[trip.driverName].addTrip(trip);
   }
 
   processInstruction(instruction) {
-    const instructions = instruction.split(' ');
+    const instructions = instruction.trim().split(' ');
     const command = instructions[0];
     switch (command) {
       case 'Driver':
-        this.addDriver(instructions);
+        this.processDriver(instructions);
         break;
       case 'Trip':
-        this.addTrip(instructions);
+        this.processTrip(instructions);
         break;
       default:
+        // TODO what to do with an unknown command?
         break;
     }
   }
