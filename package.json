@@ -1,5 +1,5 @@
 {
-  "name": "track-driving-history",
+  "name": "miles",
   "version": "0.0.0",
   "engines": {
     "node": "10.15.3",
