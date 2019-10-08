@@ -2,6 +2,10 @@
 
 A coding exercise around tracking driver's history.
 
+## Problem Statement
+
+Please see the [requirements](requirements.md) file for details on the problem statement.
+
 ## Getting Started
 
 This project was built using specific versions of Node and yarn, found in the `package.json` file. It is assumed both are installed and available.
@@ -24,11 +28,7 @@ Run the tests:
 $ yarn test
 ```
 
-## Requirements
-
-For more information, see the `exercise.md` file.
-
-## Overview
+## Application Overview
 
 The requirements of the project state that it should take input from a file, process each line within that file as an instruction, and produce some output to the console. To assist with testing, the file processing was handled outside of the main code paths. The `src/index.js` file handles processing the `input.txt` file, but delegates most of the responsibility to `src/System.js`.
 
