@@ -5,45 +5,38 @@ class Driver {
     this.name = name;
     this.totalMinutesDriven = 0;
     this.totalMilesDriven = 0;
+
+    // display values
+    this.miles = 0;
+    this.speed = 0;
   }
 
   addTrip(trip) {
-    const minutes = Driver.calculateMinutesBetween(trip);
-    const speed = Driver.calculateAverageSpeed({
+    // calculate the trip details
+    const tripMinutes = Driver.calculateMinutesBetween(trip);
+    const tripSpeed = Driver.calculateAverageSpeed({
       miles: trip.milesDriven,
-      minutes,
+      minutes: tripMinutes,
     });
+
     // Discard any trips that average a speed of less than 5 mph or greater than 100 mph
-    if (speed < 5 || speed > 100) {
+    if (tripSpeed < 5 || tripSpeed > 100) {
       return;
     }
 
-    this.totalMinutesDriven += minutes;
+    this.totalMinutesDriven += tripMinutes;
     this.totalMilesDriven += trip.milesDriven;
-  }
 
-  generateDriverData() {
-    // Round miles to the nearest integer
-    const totalMilesDriven = Math.round(this.totalMilesDriven);
+    // Round miles to the nearest integer for display
+    this.miles = Math.round(this.totalMilesDriven);
 
-    // base case which assumes that if total miles is 0, average speed is 0
-    if (totalMilesDriven === 0) {
-      return {
-        averageSpeed: 0,
-        name: this.name,
-        totalMilesDriven,
-      };
+    // only if we've traveled some distance do we update the display speed
+    if (this.miles > 0) {
+      this.speed = Driver.calculateAverageSpeed({
+        miles: this.totalMilesDriven,
+        minutes: this.totalMinutesDriven,
+      });
     }
-
-    const averageSpeed = Driver.calculateAverageSpeed({
-      miles: this.totalMilesDriven,
-      minutes: this.totalMinutesDriven,
-    });
-    return {
-      averageSpeed,
-      name: this.name,
-      totalMilesDriven,
-    };
   }
 
   static calculateMinutesBetween({ startTime, endTime }) {
